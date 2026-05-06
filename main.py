@@ -422,7 +422,7 @@ async def check_notifications_task():
 
                     if current_time == event_time and get_config("last_notification") != today_iso:
                         role_ids_list = [r.strip() for r in role_ids.split(",") if r.strip()]
-                        role_mentions = " ".join([f"<@&{rid}>" for rid in role_ids_list])
+                        role_mentions = "@everyone " + " ".join([f"<@&{rid}>" for rid in role_ids_list])
 
                         channel = client.get_channel(channel_id)
                         if channel is not None:
@@ -590,7 +590,7 @@ async def test(interaction: discord.Interaction):
     try:
         event_id, name, _channel_id, event_time, _days, role_ids, _admin_id, _created_at = event
         role_ids_list = [r.strip() for r in role_ids.split(",") if r.strip()]
-        role_mentions = " ".join([f"<@&{rid}>" for rid in role_ids_list])
+        role_mentions = "@everyone " + " ".join([f"<@&{rid}>" for rid in role_ids_list])
 
         now = datetime.now(TZ)
         today_iso = now.date().isoformat()
